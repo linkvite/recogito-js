@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import Emitter from 'tiny-emitter';
 import {
   WebAnnotation,
-  createEnvironment,
   setLocale
 } from '@recogito/recogito-client-core';
 import TextAnnotator from './TextAnnotator';
-import { deflateHTML } from './utils';
 
 import '@recogito/recogito-client-core/themes/default';
 
@@ -23,9 +21,6 @@ export class Recogito {
 
     // Event handling via tiny-emitter
     this._emitter = new Emitter();
-
-    // Environment settings container
-    this._environment = createEnvironment();
 
     // The content element (which contains the text we want to annotate)
     // is wrapped in a DIV ('wrapperEl'). The application container DIV,
@@ -43,11 +38,6 @@ export class Recogito {
 
     // Deep-clone the original node, so we can easily destroy the Recogito instance
     this._originalContent = contentEl.cloneNode(true);
-
-    // Unless this is preformatted text, remove multi spaces and
-    // empty text nodes, so that HTML char offsets == browser offsets.
-    if (config.mode !== 'pre')
-      contentEl = deflateHTML(contentEl);
 
     this._wrapperEl = document.createElement('DIV');
     this._wrapperEl.className = 'r6o-content-wrapper';
@@ -70,7 +60,6 @@ export class Recogito {
     ReactDOM.render(
       <TextAnnotator
         ref={this._app}
-        env={this._environment}
         contentEl={contentEl}
         wrapperEl={this._wrapperEl}
         config={config}
@@ -78,8 +67,7 @@ export class Recogito {
         onAnnotationCreated={this.handleAnnotationCreated}
         onAnnotationUpdated={this.handleAnnotationUpdated}
         onAnnotationDeleted={this.handleAnnotationDeleted}
-        onCancelSelected={this.handleCancelSelected}
-        relationVocabulary={config.relationVocabulary} />, this._appContainerEl);
+        onCancelSelected={this.handleCancelSelected}/>, this._appContainerEl);
   }
 
   handleAnnotationSelected = (annotation, element) =>
@@ -110,9 +98,6 @@ export class Recogito {
 
   clearAnnotations = () =>
     this.setAnnotations(null);
-
-  clearAuthInfo = () =>
-    this._environment.user = null;
 
   destroy = () => {
     ReactDOM.unmountComponentAtNode(this._appContainerEl);
@@ -172,27 +157,6 @@ export class Recogito {
     const annotations = arg || [];
     const webannotations = annotations.map(a => new WebAnnotation(a));
     return this._app.current.setAnnotations(webannotations);
-  }
-
-  setAuthInfo = authinfo =>
-    this._environment.user = authinfo;
-
-  /**
-   * Activates annotation or relationship drawing mode.
-   * @param mode a string, either ANNOTATION (default) or RELATIONS
-   */
-  setMode = mode =>
-    this._app.current.setMode(mode);
-
-  setServerTime = timestamp =>
-    this._environment.setServerTime(timestamp);
-
-  get widgets() {
-    return this._app.current.widgets;
-  }
-
-  set widgets(widgets) {
-    this._app.current.widgets = widgets;
   }
 
 }

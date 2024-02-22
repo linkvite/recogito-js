@@ -1,14 +1,8 @@
-@import '@recogito/recogito-client-core/themes/default/theme.scss';
-
-.r6o-editor {
-  margin-left:-12px;
-}
-
-.r6o-annotation {
-  background-color:rgba(255, 165, 0, 0.2);
-  border-bottom:2px solid orange;
-  cursor:pointer;
-}
+// injected from linkvite
+// :root {
+//     --modal-bg: #333;
+//     --text: #fff;
+// }
 
 .r6o-selection {
   background-color:rgba(207, 207, 255, 0.63);
@@ -23,76 +17,198 @@
   background: transparent;
 }
 
-.r6o-relation-editor {
-  position:absolute;
-  font-family:'Lato', sans-serif;
-  font-size:17px;
-  line-height:27px;
-  @include box-shadow(0, 1px, 14px, 0.4);
-  @include rounded-corners(3px);
-  transform:translate(-50%, -50%);
-  background-color:#fff;
+.special-check { 
+    visibility: hidden; 
+}
 
-  svg {
-    vertical-align:middle;
-    shape-rendering: geometricPrecision;
-  }
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    overflow-wrap: break-word;
+    overflow-x: auto;
+}
 
-  * {
-    box-sizing:border-box;
-  }
+.colorselector-widget {
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: space-around;
+    background-color: var(--modal-bg);
+}
 
-  .input-wrapper {
-    height:34px;
-    padding:0 6px;
-    margin-right:68px;
-    font-size:14px;
-    background-color:$blueish-white;
-    cursor:text;
-    @include rounded-corners-left(3px);
-    
-    .r6o-autocomplete ul {
-      position:relative;
-      left:-6px;
+button {
+    margin: 0px;
+    outline: none;
+    padding: 0px;
+    cursor: pointer;
+}
+
+.colorselector-widget .color-selector {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+
+    @media screen and (min-width: 640px) {
+        &:hover {
+            transform: scale(1.1);
+        }
     }
-  }
+}
+.colorselector-widget .selected {
+    border: 2px solid var(--text);
+}
 
-  .buttons {
-    position:absolute;
-    display:inline-flex;
-    top:0;
-    right:0;
+.r6o-annotation {
+    cursor: pointer;
+    animation: unset;
+}
 
-    span {
-      height:34px;
-      display:inline-block;
-      width:34px;
-      text-align:center;
-      font-size:14px;
-      cursor:pointer;
-      padding:1px 0;
+.r6o-selection {
+    background-color: rgba(250, 90, 95, 0.5);
+    cursor: pointer;
+}
+
+.lv-highlighter-1 {
+    background-color: rgba(250, 90, 95, 0.5);
+    border-bottom: 2px solid #fa5a5f;
+}
+
+.lv-highlighter-2 {
+    background-color: rgba(33, 150, 243, 0.5);
+    border-bottom: 2px solid #2196f3;
+}
+
+.lv-highlighter-3 {
+    background-color: rgba(29, 185, 84, 0.5);
+    border-bottom: 2px solid #1DB954;
+}
+
+.lv-highlighter-4 {
+    background-color: rgba(94, 53, 177, 0.5);
+    border-bottom: 2px solid #5e35b1;
+}
+
+.lv-highlighter-5 {
+    background-color: rgba(255, 152, 0, 0.5);
+    border-bottom: 2px solid #ff9800;
+}
+
+// TODO:
+// animate the editor from 0 to its final position in 0.3s
+.r6o-editor {
+    position: absolute;
+    z-index: 99999;
+    color: var(--text);
+    font-family: "Sans", sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    background-color: var(--modal-bg);
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    width: 250px;
+    max-width: 10rem;
+}
+
+@media (max-width: 640px) {
+    .r6o-editor {
+        width: 280px;
+        width: 8rem;
+    }
+}
+
+.action-quote-icon,
+.action-copy-icon,
+.action-comment-icon, 
+.action-delete-icon
+{
+    all: unset;
+    width: 19px;
+    height: 19px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--text);
     }
 
-    .delete {
-      background-color:#fff;
-      color:$lightblue-type;
-      border-left:1px solid $lightgrey-border;
+    @media (min-width: 640px) {
+        &:hover {
+            transform: scale(1.1);
+        }
     }
+}
 
-    .delete:hover {
-      background-color:#f6f6f6;
-    }
+.r6o-editor .r6o-arrow {
+    position: absolute;
+    overflow: hidden;
+    top: -12px;
+    left: 12px;
+    width: 28px;
+    height: 12px;
+}
 
-    .ok {
-      background-color:$ocean;
-      color:#fff;
-      @include rounded-corners-right(3px);
-    }
+.r6o-editor .r6o-arrow:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--modal-bg);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
 
-    .ok:hover {
-      background-color:$ocean-hover;
-    }
+.r6o-editor .r6o-footer {
+    display: none;
+}
 
-  }
+.r6o-editor.r6o-arrow-top .r6o-arrow {
+    display: block;
+}
 
+.r6o-editor.r6o-arrow-right {
+    margin-left: 8px;
+}
+
+.r6o-editor.r6o-arrow-right .r6o-arrow {
+    left: auto;
+    right: 12px;
+}
+
+.r6o-editor.r6o-arrow-bottom .r6o-arrow {
+    display: block;
+    top: auto;
+    bottom: -12px;
+}
+
+.r6o-editor.r6o-arrow-bottom .r6o-arrow::after {
+    top: -11px;
+    box-shadow: none;
+}
+
+.r6o-editor {
+    margin-left: 0;
+}
+
+.r6o-hide-selection::selection,
+.r6o-hide-selection ::selection {
+    background: transparent;
+}
+
+.r6o-hide-selection::-moz-selection .r6o-hide-selection ::-moz-selection {
+    background: transparent;
 }
