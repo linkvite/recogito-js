@@ -8,10 +8,17 @@ const APP_DIR = fs.realpathSync(process.cwd());
 
 const resolveAppPath = relativePath => path.resolve(APP_DIR, relativePath);
 
+// get the linkvite version from package.json
+// the the file name should be
+// recogito.<version>.min.js
+const packageJson = fs.readFileSync(resolveAppPath('package.json'));
+const packageData = JSON.parse(packageJson);
+const version = packageData.linkviteVersion;
+
 module.exports = {
     entry: resolveAppPath('src'),
     output: {
-        filename: 'recogito.min.js',
+        filename: `recogito.${version}.min.js`,
         library: 'Recogito',
         libraryTarget: 'umd',
         umdNamedDefine: true
@@ -76,7 +83,7 @@ module.exports = {
             template: resolveAppPath('public/index.html')
         }),
         new MiniCssExtractPlugin({
-            filename: 'recogito.min.css',
+            filename: `recogito.${version}.min.css`
         })
     ]
 }
