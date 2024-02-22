@@ -165,6 +165,7 @@ button {
     height: 18px;
     background-color: var(--modal-bg);
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

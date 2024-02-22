@@ -101,10 +101,10 @@ export default class TextAnnotator extends Component {
         }
 
         /**
-         * Retrieves the highlight color based on the specified value.
+         * Retrieves the annotation highlight color based on the specified value.
          *
-         * @param {string} value - The value used to determine the highlight color.
-         * @return {string} The corresponding highlight color.
+         * @param {string} value - The value used to determine the annotation highlight color.
+         * @return {string} The corresponding annotation highlight color.
          */
         function getHighlightColor(value) {
             switch (value) {
@@ -256,12 +256,12 @@ export default class TextAnnotator extends Component {
                 const i = document.createElement('button');
                 i.className = `action-${icon.name}-icon`;
                 i.addEventListener('click', function () {
+                    linkvite.sendMessage(`annotation:${icon.name}`, args.annotation.underlying);
+                    
                     if (icon.name == 'delete') {
                         onDelete(args.annotation.underlying);
                         return;
                     }
-
-                    linkvite.sendMessage(`highlight:${icon.name}`, args.annotation.underlying);
 
                     closeOptionsModal();
                 });

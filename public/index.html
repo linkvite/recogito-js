@@ -67,11 +67,10 @@
 
     <script type="text/javascript">
         (function () {
-            var r = Recogito.init({
-                content: 'lv-article-body',
+            const RECOGITO_CONFIG = {
                 mode: 'pre',
                 allowEmpty: true,
-                locale: 'auto',
+                content: 'lv-article-body',
                 linkvite: {
                     autoHighlight: {
                         enabled: false,
@@ -85,7 +84,9 @@
                         )
                     }
                 },
-            });
+            };
+            
+            const r = Recogito.init(RECOGITO_CONFIG);
 
             r.loadAnnotations('annotations.w3c.json')
                 .then(() => console.log('loaded'));
