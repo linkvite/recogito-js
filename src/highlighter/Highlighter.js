@@ -77,7 +77,8 @@ export default class Highlighter {
             const spans = this.wrapRange(range);
 
             if (annotation?.underlying?.note) {
-                this._createCommentIcon(spans[0], annotation);
+                if (!spans.length) return;
+                this._createCommentIcon(spans[spans.length - 1], annotation);
             }
 
             this.applyStyles(annotation, spans);

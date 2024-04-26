@@ -29,6 +29,7 @@
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "b7465586-d1c4-4f2a-992c-1b2cf1e117d1",
         "type": "Annotation",
+        "note": "Trying out comments on annotations",
         "body": [
             {
                 "type": "TextualBody",
@@ -40,12 +41,38 @@
             "selector": [
                 {
                     "type": "TextQuoteSelector",
-                    "exact": "famous town of Troy."
+                    "exact": "home."
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 168,
-                    "end": 188
+                    "start": 1581,
+                    "end": 1586
+                }
+            ]
+        }
+    },
+    {
+        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "id": "b7465586-d1c4-4f2a-992c-1b2cf1e117d1",
+        "type": "Annotation",
+        "note": "Trying out comments on annotations",
+        "body": [
+            {
+                "type": "TextualBody",
+                "purpose": "highlighting",
+                "value": "lv-highlighter-2"
+            }
+        ],
+        "target": {
+            "selector": [
+                {
+                    "type": "TextQuoteSelector",
+                    "exact": "Tell me, O muse, of that ingenious hero who travelled far and wide after he had sacked\n                the famous town of Troy. Many cities did he visit, and many were the nations with whose manners and\n                customs\n                he was acquainted; moreover he suffered much by sea while trying to save his own life and bring his men\n                safely\n                home; but do what he might he could not save his men, for they perished through their own sheer folly in\n                eating\n                the cattle of the Sun-god Hyperion; so the god prevented them from ever reaching home. Tell me, too,\n                about all\n                these things, O daughter of Jove, from whatsoever source you may know them."
+                },
+                {
+                    "type": "TextPositionSelector",
+                    "start": 61,
+                    "end": 809
                 }
             ]
         }
