@@ -162,8 +162,8 @@ button {
     background-color: transparent;
     transform: translate(.2em, .3em);
     font-size: var(--font-scale);
-    min-width: calc(1.1em + 5px);
-    height: calc(1.1em + 5px);
+    min-width: calc(1em + 5px);
+    height: calc(1em + 5px);
 
     svg {
         width: 100%;

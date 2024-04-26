@@ -62,7 +62,7 @@ export default class Highlighter {
 
         this._store[annotation.id]?.remove();
 
-        span.parentNode.insertBefore(i, span.nextSibling);
+        span.appendChild(i);
         ReactDOM.render(<CommentIcon />, i);
 
         this._store[annotation.id] = i;
