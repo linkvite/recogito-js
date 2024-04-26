@@ -158,12 +158,11 @@ button {
     all: unset;
     transition: all 0.3s ease;
     cursor: pointer;
-    margin-right: .35em;
+    margin-left: 8px;
     background-color: transparent;
-    transform: translate(.3em, .2em);
-    font-size: var(--font-scale);
-    min-width: calc(1em + 3px);
+    transform: translateY(.2em);
     height: calc(1em + 3px);
+    max-height: 45px;
 
     svg {
         width: 100%;
