@@ -2,6 +2,7 @@
 // :root {
 //     --modal-bg: #333;
 //     --text: #fff;
+//     --font-scale: 100%;
 // }
 
 .r6o-selection {
@@ -96,6 +97,10 @@ button {
     border-bottom: 2px solid #ff9800;
 }
 
+.r6o-editor .r6o-editor-inner {
+    background-color: var(--modal-bg) !important;
+}
+
 // TODO:
 // animate the editor from 0 to its final position in 0.3s
 .r6o-editor {
@@ -145,6 +150,31 @@ button {
     @media (min-width: 640px) {
         &:hover {
             transform: scale(1.1);
+        }
+    }
+}
+
+.annotation-comment-icon {
+    all: unset;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-right: .3em;
+    background-color: transparent;
+    transform: translate(.2em, .3em);
+    font-size: var(--font-scale);
+    min-width: calc(1.1em + 5px);
+    height: calc(1.1em + 5px);
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--text);
+        background-color: transparent;
+    }
+
+    @media (min-width: 640px) {
+        &:hover {
+            scale :1.05;
         }
     }
 }

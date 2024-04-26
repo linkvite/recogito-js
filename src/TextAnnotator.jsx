@@ -44,9 +44,9 @@ export default class TextAnnotator extends Component {
                 widget: (args) => {
                     return this.colorSelectorWidget({
                         args,
+                        linkvite: this.props.config.linkvite,
                         onDelete: this.onDeleteAnnotation,
                         onAddOrUpdate: this.addAnnotation,
-                        linkvite: this.props.config.linkvite,
                         onCreate: this.onCreateOrUpdateAnnotation('onAnnotationCreated'),
                         onUpdate: this.onCreateOrUpdateAnnotation('onAnnotationUpdated'),
                     });
@@ -253,11 +253,11 @@ export default class TextAnnotator extends Component {
 
         if (currentColorBody) {
             for (const icon of icons) {
-                const i = document.createElement('button');
+                const i = document.createElement('span');
                 i.className = `action-${icon.name}-icon`;
                 i.addEventListener('click', function () {
                     linkvite.sendMessage(`annotation:${icon.name}`, args.annotation.underlying);
-                    
+
                     if (icon.name == 'delete') {
                         onDelete(args.annotation.underlying);
                         return;
@@ -288,8 +288,7 @@ export default class TextAnnotator extends Component {
     }
 
     componentDidMount() {
-        this.highlighter = new Highlighter(this.props.contentEl);
-
+        this.highlighter = new Highlighter(this.props.contentEl, this.props.config.linkvite);
         this.selectionHandler = new SelectionHandler(this.props.contentEl, this.highlighter, this.props.config.readOnly);
         this.selectionHandler.on('select', this.handleSelect);
 

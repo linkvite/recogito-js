@@ -1,50 +1,51 @@
 [
     {
         "@context": "http://www.w3.org/ns/anno.jsonld",
-        "id": "ce0ed291-766b-4763-8e91-90ce1d04e706",
+        "id": "b5d9323d-40e2-448e-ab0a-3b17f50f7c8b",
         "type": "Annotation",
+        "note": "Trying out comments on annotations",
         "body": [
             {
                 "type": "TextualBody",
-                "value": "lv-highlighter-1",
-                "purpose": "highlighting"
+                "purpose": "highlighting",
+                "value": "lv-highlighter-4"
             }
         ],
         "target": {
             "selector": [
                 {
                     "type": "TextQuoteSelector",
-                    "exact": "Troy"
+                    "exact": "goddess Calypso"
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 124,
-                    "end": 128
+                    "start": 1060,
+                    "end": 1075
                 }
             ]
         }
     },
     {
         "@context": "http://www.w3.org/ns/anno.jsonld",
-        "id": "447d4bea-08dc-4bd0-ae51-31f5ed7a95a0",
+        "id": "b7465586-d1c4-4f2a-992c-1b2cf1e117d1",
         "type": "Annotation",
         "body": [
             {
                 "type": "TextualBody",
-                "value": "lv-highlighter-2",
-                "purpose": "highlighting"
+                "purpose": "highlighting",
+                "value": "lv-highlighter-2"
             }
         ],
         "target": {
             "selector": [
                 {
                     "type": "TextQuoteSelector",
-                    "exact": "death in battle"
+                    "exact": "famous town of Troy."
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 646,
-                    "end": 661
+                    "start": 168,
+                    "end": 188
                 }
             ]
         }

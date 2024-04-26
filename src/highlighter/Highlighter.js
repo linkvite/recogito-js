@@ -1,11 +1,14 @@
+import CommentIcon from '../icons/comment.svg';
+
 const RENDER_BATCH_SIZE = 100; // Number of annotations to render in one frame
 
 const uniqueItems = items => Array.from(new Set(items))
 
 export default class Highlighter {
 
-    constructor(element) {
+    constructor(element, linkvite) {
         this.el = element;
+        this.linkvite = linkvite;
     }
 
     init = annotations => new Promise((resolve, _) => {
@@ -47,6 +50,24 @@ export default class Highlighter {
         }
     }
 
+    _store = {};
+
+    _createCommentIcon(span, annotation) {
+        const i = document.createElement('button');
+        i.className = 'annotation-comment-icon';
+        i.addEventListener('click', (e) => {
+            e.stopImmediatePropagation();
+            this.linkvite.sendMessage(`annotation:comment`, annotation.underlying);
+        });
+
+        this._store[annotation.id]?.remove();
+
+        span.parentNode.insertBefore(i, span.nextSibling);
+        ReactDOM.render(<CommentIcon />, i);
+
+        this._store[annotation.id] = i;
+    }
+
     _addAnnotation = annotation => {
         try {
             const [domStart, domEnd] = this.charOffsetsToDOMPosition([annotation.start, annotation.end]);
@@ -54,6 +75,11 @@ export default class Highlighter {
             range.setStart(domStart.node, domStart.offset);
             range.setEnd(domEnd.node, domEnd.offset);
             const spans = this.wrapRange(range);
+
+            if (annotation?.underlying?.note) {
+                this._createCommentIcon(spans[0], annotation);
+            }
+
             this.applyStyles(annotation, spans);
             this.bindAnnotation(annotation, spans);
         } catch (error) {
@@ -93,6 +119,7 @@ export default class Highlighter {
     }
 
     removeAnnotation = annotation => {
+        this._store[annotation.id]?.remove();
         const spans = this.findAnnotationSpans(annotation);
         if (spans) {
             this._unwrapHighlightings(spans)
@@ -101,6 +128,7 @@ export default class Highlighter {
     }
 
     clear = () => {
+        Object.values(this._store).forEach(i => i.remove());
         const allAnnotationSpans = Array.from(this.el.querySelectorAll('.r6o-annotation'));
         this._unwrapHighlightings(allAnnotationSpans);
         this.el.normalize();
