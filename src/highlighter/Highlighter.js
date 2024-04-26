@@ -56,6 +56,8 @@ export default class Highlighter {
         const i = document.createElement('button');
         i.className = 'annotation-comment-icon';
         i.addEventListener('click', (e) => {
+            document.querySelector('.r6o-btn.outline')?.click();
+
             e.stopImmediatePropagation();
             this.linkvite.sendMessage(`annotation:comment`, annotation.underlying);
         });

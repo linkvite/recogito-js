@@ -227,9 +227,7 @@ export default class TextAnnotator extends Component {
          * Closes the options modal.
          */
         function closeOptionsModal() {
-            // get the "r6o-btn outline" element.
-            const element = document.querySelector('.r6o-btn.outline');
-            element.click();
+            document.querySelector('.r6o-btn.outline')?.click();
         }
 
         const icons = [
