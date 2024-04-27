@@ -15,12 +15,12 @@
             "selector": [
                 {
                     "type": "TextQuoteSelector",
-                    "exact": "goddess Calypso"
+                    "exact": "goddess Calypso,"
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 1060,
-                    "end": 1075
+                    "start": 1135,
+                    "end": 1151
                 }
             ]
         }
@@ -45,8 +45,8 @@
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 1581,
-                    "end": 1586
+                    "start": 1656,
+                    "end": 1661
                 }
             ]
         }
@@ -71,8 +71,8 @@
                 },
                 {
                     "type": "TextPositionSelector",
-                    "start": 61,
-                    "end": 809
+                    "start": 136,
+                    "end": 884
                 }
             ]
         }

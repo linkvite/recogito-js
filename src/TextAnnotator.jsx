@@ -39,12 +39,14 @@ export default class TextAnnotator extends Component {
             // ReadOnly mode
             readOnly: this.props.config.readOnly,
 
+            // linkvite configuration
+            linkvite: this.props.config.linkvite,
+
             widgets: [{
                 force: 'PlainJS',
                 widget: (args) => {
                     return this.colorSelectorWidget({
                         args,
-                        linkvite: this.props.config.linkvite,
                         onDelete: this.onDeleteAnnotation,
                         onAddOrUpdate: this.addAnnotation,
                         onCreate: this.onCreateOrUpdateAnnotation('onAnnotationCreated'),
@@ -65,14 +67,13 @@ export default class TextAnnotator extends Component {
      * Function for creating and managing a color selector widget.
      *
      * @param {object} args - The arguments for the color selector widget
-     * @param {object} linkvite - Props passed from linkvite
      * @param {function} onDelete - The function to handle deletion
      * @param {function} onAddOrUpdate - The function to handle adding or updating
      * @param {function} onCreate - The function to handle creation
      * @param {function} onUpdate - The function to handle update
      * @return {HTMLDivElement} The container element for the color selector widget
      */
-    colorSelectorWidget({ args, linkvite, onDelete, onAddOrUpdate, onCreate, onUpdate }) {
+    colorSelectorWidget({ args, onDelete, onAddOrUpdate, onCreate, onUpdate }) {
         const target = args.annotation.clone();
         const container = document.createElement('div');
         container.className = 'colorselector-widget';
@@ -85,15 +86,15 @@ export default class TextAnnotator extends Component {
 
         const currentColorValue = currentColorBody ? currentColorBody.value : null;
 
-        if (linkvite.autoHighlight.enabled && args.annotation.isSelection) {
+        if (this.state.linkvite.autoHighlight.enabled && args.annotation.isSelection) {
             target.underlying.body = [{
                 type: 'TextualBody',
                 purpose: 'highlighting',
-                value: linkvite.autoHighlight.color,
+                value: this.state.linkvite.autoHighlight.color,
             }];
 
             closeOptionsModal();
-            const delay = linkvite.autoHighlight.delay;
+            const delay = this.state.linkvite.autoHighlight.delay;
             const timeout = setTimeout(() => {
                 onCreate(target.toAnnotation());
                 clearTimeout(timeout);
@@ -251,10 +252,10 @@ export default class TextAnnotator extends Component {
 
         if (currentColorBody) {
             for (const icon of icons) {
-                const i = document.createElement('span');
+                const i = document.createElement('button');
                 i.className = `action-${icon.name}-icon`;
-                i.addEventListener('click', function () {
-                    linkvite.sendMessage(`annotation:${icon.name}`, args.annotation.underlying);
+                i.addEventListener('click', () => {
+                    this.state.linkvite.sendMessage(`annotation:${icon.name}`, args.annotation.underlying);
 
                     if (icon.name == 'delete') {
                         onDelete(args.annotation.underlying);
@@ -286,7 +287,7 @@ export default class TextAnnotator extends Component {
     }
 
     componentDidMount() {
-        this.highlighter = new Highlighter(this.props.contentEl, this.props.config.linkvite);
+        this.highlighter = new Highlighter(this.props.contentEl, this.state.linkvite);
         this.selectionHandler = new SelectionHandler(this.props.contentEl, this.highlighter, this.props.config.readOnly);
         this.selectionHandler.on('select', this.handleSelect);
 
@@ -301,6 +302,31 @@ export default class TextAnnotator extends Component {
         // Disable selection outside of the editor 
         // when user makes the first change
         this.selectionHandler.enabled = false;
+    }
+
+    // update auto highlight
+    setAutoHighlight = value => {
+        this.setState((state, props) => ({
+            linkvite: {
+                ...state.linkvite,
+                autoHighlight: {
+                    ...state.linkvite.autoHighlight,
+                    enabled: value,
+                }
+            }
+        }));
+    }
+
+    setAutoHighlightColor = value => {
+        this.setState((state, props) => ({
+            linkvite: {
+                ...state.linkvite,
+                autoHighlight: {
+                    ...state.linkvite.autoHighlight,
+                    color: value,
+                }
+            }
+        }));
     }
 
     /**************************/

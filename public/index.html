@@ -36,6 +36,11 @@
 <body>
     <div id="outer-container">
         <div id="lv-article-body" class="plaintext">
+            <label for="autoHighlight">
+                <input type="checkbox" id="autoHighlight" onchange="toggleAutoHighlight()" />
+                Auto-highlight
+            </label>
+
             <h1>Homer: The Odyssey</h1>
             <p>
                 <strong>Tell me, O muse,</strong> of that ingenious hero who travelled far and wide after he had sacked
@@ -66,6 +71,7 @@
     </div>
 
     <script type="text/javascript">
+        var r;
         (function () {
             const RECOGITO_CONFIG = {
                 mode: 'pre',
@@ -85,8 +91,8 @@
                     }
                 },
             };
-            
-            const r = Recogito.init(RECOGITO_CONFIG);
+
+            r = Recogito.init(RECOGITO_CONFIG);
 
             r.loadAnnotations('annotations.w3c.json')
                 .then(() => console.log('loaded'));
@@ -107,6 +113,12 @@
                 console.log('cancel', annotation);
             });
         })();
+
+        function toggleAutoHighlight() {
+            const autoHighlight = document.getElementById('autoHighlight');
+            r.setAutoHighlight(autoHighlight.checked);
+            r.setAutoHighlightColor("lv-highlighter-1");
+        }
     </script>
 </body>
 
