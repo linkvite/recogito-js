@@ -89,12 +89,8 @@ export class Recogito {
     /*  External API  */
     /******************/
 
-    setAutoHighlight = value => {
-        this._app.current.setAutoHighlight(value);
-    }
-
-    setAutoHighlightColor = value => {
-        this._app.current.setAutoHighlightColor(value);
+    setAutoHighlight = props => {
+        this._app.current.setAutoHighlight(props);
     }
 
     // Common shorthand for handling annotationOrId args

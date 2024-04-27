@@ -305,25 +305,13 @@ export default class TextAnnotator extends Component {
     }
 
     // update auto highlight
-    setAutoHighlight = value => {
-        this.setState((state, props) => ({
+    setAutoHighlight = props => {
+        this.setState((state) => ({
             linkvite: {
                 ...state.linkvite,
                 autoHighlight: {
-                    ...state.linkvite.autoHighlight,
-                    enabled: value,
-                }
-            }
-        }));
-    }
-
-    setAutoHighlightColor = value => {
-        this.setState((state, props) => ({
-            linkvite: {
-                ...state.linkvite,
-                autoHighlight: {
-                    ...state.linkvite.autoHighlight,
-                    color: value,
+                    color: props.color,
+                    enabled: props.enabled
                 }
             }
         }));

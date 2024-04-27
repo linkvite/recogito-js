@@ -116,8 +116,10 @@
 
         function toggleAutoHighlight() {
             const autoHighlight = document.getElementById('autoHighlight');
-            r.setAutoHighlight(autoHighlight.checked);
-            r.setAutoHighlightColor("lv-highlighter-1");
+            r.setAutoHighlight({
+                enabled: autoHighlight.checked,
+                color: 'lv-highlighter-1',
+            });
         }
     </script>
 </body>
