@@ -161,7 +161,9 @@ button {
     margin-left: 8px;
     background-color: transparent;
     transform: translateY(.2em);
+    width: calc(1em + 3px);
     height: calc(1em + 3px);
+    max-width: 50px;
     max-height: 45px;
 
     svg {
