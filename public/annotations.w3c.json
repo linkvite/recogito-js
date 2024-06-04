@@ -3,7 +3,7 @@
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "b5d9323d-40e2-448e-ab0a-3b17f50f7c8b",
         "type": "Annotation",
-        "note": "Trying out comments on annotations",
+        "note": "Trying out notes on annotations",
         "body": [
             {
                 "type": "TextualBody",
@@ -29,7 +29,7 @@
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "b7465586-d1c4-4f2a-992c-1b2cf1e117d1",
         "type": "Annotation",
-        "note": "Trying out comments on annotations",
+        "note": "Trying out notes on annotations",
         "body": [
             {
                 "type": "TextualBody",
@@ -55,7 +55,7 @@
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "b7465586-d1c4-4f2a-992c-1b2cf1e117d1",
         "type": "Annotation",
-        "note": "Trying out comments on annotations",
+        "note": "Trying out notes on annotations",
         "body": [
             {
                 "type": "TextualBody",

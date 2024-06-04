@@ -71,7 +71,7 @@ module.exports = {
         compress: true,
         hot: true,
         allowedHosts: "all",
-        port: 3000,
+        port: 9090,
         static: {
             directory: resolveAppPath('public'),
             publicPath: '/'

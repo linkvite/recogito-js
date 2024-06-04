@@ -130,8 +130,8 @@ button {
 
 .action-quote-icon,
 .action-copy-icon,
-.action-comment-icon, 
-.action-delete-icon
+.action-note-icon, 
+.action-deleted-icon
 {
     all: unset;
     width: 19px;
@@ -154,7 +154,7 @@ button {
     }
 }
 
-.annotation-comment-icon {
+.annotation-note-icon {
     all: unset;
     transition: all 0.3s ease;
     cursor: pointer;

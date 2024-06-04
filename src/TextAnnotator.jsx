@@ -4,13 +4,13 @@ import { Editor } from '@recogito/recogito-client-core';
 import Highlighter from './highlighter/Highlighter';
 import SelectionHandler from './selection/SelectionHandler';
 
-// Comment icons created by Smashicons - Flaticon
-import CommentIcon from './icons/comment.svg';
-// Quote icons created by Arafat Uddin - Flaticon<
+// Note icon created by Smashicons - Flaticon
+import NoteIcon from './icons/note.svg';
+// Quote icon created by Arafat Uddin - Flaticon<
 import QuoteIcon from './icons/quote.svg';
-// Trash can icons created by Md Tanvirul Haque - Flaticon
+// Trash can icon created by Md Tanvirul Haque - Flaticon
 import TrashIcon from './icons/trash.svg';
-// Copy icons created by Pixel perfect - Flaticon
+// Copy icon created by Pixel perfect - Flaticon
 import CopyIcon from './icons/copy.svg';
 
 import './TextAnnotator.scss';
@@ -241,11 +241,11 @@ export default class TextAnnotator extends Component {
                 icon: CopyIcon,
             },
             {
-                name: 'comment',
-                icon: CommentIcon,
+                name: 'note',
+                icon: NoteIcon,
             },
             {
-                name: 'delete',
+                name: 'deleted',
                 icon: TrashIcon,
             },
         ];
@@ -255,9 +255,9 @@ export default class TextAnnotator extends Component {
                 const i = document.createElement('button');
                 i.className = `action-${icon.name}-icon`;
                 i.addEventListener('click', () => {
-                    this.state.linkvite.sendMessage(`annotation:${icon.name}`, args.annotation.underlying);
+                    this.state.linkvite.sendMessage(`highlight:${icon.name}`, args.annotation.underlying);
 
-                    if (icon.name == 'delete') {
+                    if (icon.name == 'deleted') {
                         onDelete(args.annotation.underlying);
                         return;
                     }

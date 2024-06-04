@@ -1,4 +1,4 @@
-import CommentIcon from '../icons/comment.svg';
+import NoteIcon from '../icons/note.svg';
 
 const RENDER_BATCH_SIZE = 100; // Number of annotations to render in one frame
 
@@ -41,9 +41,7 @@ export default class Highlighter {
     })
 
     _formatter(annotation) {
-        const withBody = annotation.bodies.find(function (b) {
-            return b.purpose == 'highlighting';
-        });
+        const withBody = annotation.bodies.find((b) => b.purpose == 'highlighting');
 
         if (withBody && withBody.value) {
             return withBody.value;
@@ -52,20 +50,20 @@ export default class Highlighter {
 
     _store = {};
 
-    _createCommentIcon(span, annotation) {
+    _createNoteIcon(span, annotation) {
         const i = document.createElement('button');
-        i.className = 'annotation-comment-icon';
+        i.className = 'annotation-note-icon';
         i.addEventListener('click', (e) => {
             document.querySelector('.r6o-btn.outline')?.click();
 
             e.stopImmediatePropagation();
-            this.linkvite.sendMessage(`annotation:comment`, annotation.underlying);
+            this.linkvite.sendMessage("highlight:note", annotation.underlying);
         });
 
         this._store[annotation.id]?.remove();
 
         span.appendChild(i);
-        ReactDOM.render(<CommentIcon />, i);
+        ReactDOM.render(<NoteIcon />, i);
 
         this._store[annotation.id] = i;
     }
@@ -80,7 +78,7 @@ export default class Highlighter {
 
             if (annotation?.underlying?.note) {
                 if (!spans.length) return;
-                this._createCommentIcon(spans[spans.length - 1], annotation);
+                this._createNoteIcon(spans[spans.length - 1], annotation);
             }
 
             this.applyStyles(annotation, spans);
@@ -235,7 +233,7 @@ export default class Highlighter {
 
         const textNodeProps = (() => {
             let start = 0;
-            return this.walkTextNodes(this.el, maxOffset).map(function (node) {
+            return this.walkTextNodes(this.el, maxOffset).map((node) => {
                 var nodeLength = node.textContent.length,
                     nodeProps = { node: node, start: start, end: start + nodeLength };
 
@@ -274,8 +272,8 @@ export default class Highlighter {
     calculateDomPositionWithin = (textNodeProperties, charOffsets) => {
         var positions = [];
 
-        textNodeProperties.forEach(function (props, i) {
-            charOffsets.forEach(function (charOffset, j) {
+        textNodeProperties.forEach((props, i) => {
+            charOffsets.forEach((charOffset, j) => {
                 if (charOffset >= props.start && charOffset <= props.end) {
                     // Don't attach nodes for the same charOffset twice
                     var previousOffset = (positions.length > 0) ?
@@ -326,7 +324,7 @@ export default class Highlighter {
             var endWrapper = surround(endRange);
 
             // And wrap nodes in between, if any
-            var centerWrappers = nodesBetween.reverse().map(function (node) {
+            var centerWrappers = nodesBetween.reverse().map((node) => {
                 const wrapper = document.createElement('SPAN');
                 node.parentNode.insertBefore(wrapper, node);
                 wrapper.appendChild(node);
@@ -339,7 +337,7 @@ export default class Highlighter {
 
     getAnnotationsAt = element => {
         // Helper to get all annotations in case of multipe nested annotation spans
-        var getAnnotationsRecursive = function (element, a) {
+        var getAnnotationsRecursive = (element, a) => {
             var annotations = (a) ? a : [],
                 parent = element.parentNode;
 
