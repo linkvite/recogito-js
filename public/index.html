@@ -97,19 +97,19 @@
             r.loadAnnotations('annotations.w3c.json')
                 .then(() => console.log('loaded'));
 
-            r.on('selectAnnotation', function (a) {
+            r.on('select:annotation', function (a) {
                 console.log('selected', a);
             });
 
-            r.on('createAnnotation', function (a) {
+            r.on('create:annotation', function (a) {
                 console.log('created', a);
             });
 
-            r.on('updateAnnotation', function (annotation, previous) {
+            r.on('update:annotation', function (annotation, previous) {
                 console.log('updated', previous, 'with', annotation);
             });
 
-            r.on('cancelSelected', function (annotation) {
+            r.on('cancel:selected', function (annotation) {
                 console.log('cancel', annotation);
             });
         })();

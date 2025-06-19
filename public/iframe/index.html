@@ -33,15 +33,15 @@
 
         r.loadAnnotations('../annotations.w3c.json');
 
-        r.on('selectAnnotation', function(a) {
+        r.on('select:annotation', function(a) {
           console.log('selected', a);
         });
 
-        r.on('createAnnotation', function(a) {
+        r.on('create:annotation', function(a) {
           console.log('created', a);
         });
 
-        r.on('updateAnnotation', function(annotation, previous) {
+        r.on('update:annotation', function(annotation, previous) {
           console.log('updated', previous, 'with', annotation);
         });
       };

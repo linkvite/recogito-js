@@ -46,7 +46,7 @@ include it in your web page.
       });
 
       // Add an event handler  
-      r.on('createAnnotation', function(annotation) { /** **/ });
+      r.on('create:annotation', function(annotation) { /** **/ });
     })();
   </script>
 </body>

@@ -71,19 +71,19 @@ export class Recogito {
     }
 
     handleAnnotationSelected = (annotation, element) =>
-        this._emitter.emit('selectAnnotation', annotation.underlying, element);
+        this._emitter.emit('select:annotation', annotation.underlying, element);
 
     handleAnnotationCreated = (annotation, overrideId) =>
-        this._emitter.emit('createAnnotation', annotation.underlying, overrideId);
+        this._emitter.emit('create:annotation', annotation.underlying, overrideId);
 
     handleAnnotationUpdated = (annotation, previous) =>
-        this._emitter.emit('updateAnnotation', annotation.underlying, previous.underlying);
+        this._emitter.emit('update:annotation', annotation.underlying, previous.underlying);
 
     handleAnnotationDeleted = annotation =>
-        this._emitter.emit('deleteAnnotation', annotation.underlying);
+        this._emitter.emit('delete:annotation', annotation.underlying);
 
     handleCancelSelected = annotation =>
-        this._emitter.emit('cancelSelected', annotation.underlying);
+        this._emitter.emit('cancel:selected', annotation.underlying);
 
     /******************/
     /*  External API  */
