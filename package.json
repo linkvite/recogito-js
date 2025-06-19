@@ -1,7 +1,7 @@
 {
   "name": "@recogito/recogito-js",
   "version": "1.8.4",
-  "linkviteVersion": "12",
+  "linkviteVersion": "14",
   "description": "A JavaScript library for text annotation",
   "main": "dist/recogito.min.js",
   "scripts": {
